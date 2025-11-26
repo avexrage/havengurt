@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
-import drinkImg from '../assets/images/ca.png';
-import scoopImg from '../assets/images/carica.jpg';
-import iceImg from '../assets/images/na.png';
+import drinkImg from '../assets/images/drinks.png';
+import scoopImg from '../assets/images/cups.png';
+import iceImg from '../assets/images/lolly.png';
 
 export const ProductSection = ({ onCategorySelect }) => {
     const { t } = useLanguage();
