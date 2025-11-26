@@ -101,6 +101,17 @@ export const Navbar = ({ cartCount, onOpenCart, onNavigate, currentView, animate
                         </button>
                     )}
 
+                    {/* Mobile Login Icon */}
+                    <button onClick={user ? () => onNavigate('profile') : onLoginClick} className="md:hidden text-brand-black mr-2">
+                        {user ? (
+                            <div className="w-6 h-6 bg-brand-blue rounded-full flex items-center justify-center text-white text-[10px] font-bold overflow-hidden">
+                                {user.avatar ? <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" /> : (user.name?.charAt(0) || 'U')}
+                            </div>
+                        ) : (
+                            <Icons.User />
+                        )}
+                    </button>
+
                     <button className="md:hidden text-brand-black" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                         <Icons.Menu />
                     </button>
@@ -111,7 +122,6 @@ export const Navbar = ({ cartCount, onOpenCart, onNavigate, currentView, animate
             {mobileMenuOpen && (
                 <div className="absolute top-full left-0 w-full bg-white shadow-lg p-4 flex flex-col gap-4 md:hidden">
                     <button onClick={() => handleNavClick('home')} className="text-left font-semibold text-brand-text">{t('nav.home')}</button>
-                    <button onClick={() => handleNavClick('about')} className="text-left font-semibold text-brand-text">{t('nav.about')}</button>
                     <button onClick={() => handleNavClick('about')} className="text-left font-semibold text-brand-text">{t('nav.about')}</button>
                     <button onClick={handleProductClick} className="text-left font-semibold text-brand-text">{t('nav.products')}</button>
                     {user ? (
