@@ -52,10 +52,10 @@ export const ProductSection = ({ onCategorySelect }) => {
                         </div>
 
                         {/* Label Card */}
-                        <div className="absolute bottom-8 right-8">
-                            <div className="bg-[#115AA6] p-6 rounded-xl text-white text-center transition-all duration-300 group-hover:bg-white/20 group-hover:backdrop-blur-md group-hover:border group-hover:border-white/30">
-                                <h3 className="font-bold text-xl mb-1">{cat.title}</h3>
-                                <p className={`font-bold text-sm ${cat.id === 'drink' ? 'text-[#7ED957]' : 'text-[#7ED957]'}`}>{t('products.seeMore')}</p>
+                        <div className="absolute bottom-6 right-6">
+                            <div className="bg-[#115AA6] p-4 rounded-xl text-white text-center transition-all duration-300 group-hover:bg-white/20 group-hover:backdrop-blur-md group-hover:border group-hover:border-white/30 shadow-lg">
+                                <h3 className="font-bold text-lg mb-0.5">{cat.title}</h3>
+                                <p className="font-bold text-xs text-white/90 group-hover:text-white">{t('products.seeMore')}</p>
                             </div>
                         </div>
                     </motion.div>
