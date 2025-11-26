@@ -70,11 +70,25 @@ export const Navbar = ({ cartCount, onOpenCart, onNavigate, currentView, animate
                                 <Icons.ShoppingBag />
                                 <span className="absolute -top-1 -right-1 w-5 h-5 bg-brand-blue text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">
                                     {cartCount}
-                                    <button onClick={() => handleNavClick('about')} className="text-left font-semibold text-brand-text">{t('nav.about')}</button>
-                                    <button onClick={handleProductClick} className="text-left font-semibold text-brand-text">{t('nav.products')}</button>
-                                </div>
-                                )
-                }
-                            </motion.nav >
-                        );
+                                </span>
+                            </motion.button>
+                        )}
+                    </AnimatePresence>
+
+                    <button className="md:hidden text-brand-black" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                        <Icons.Menu />
+                    </button>
+                </div>
+            </div>
+
+            {/* Mobile Menu Overlay */}
+            {mobileMenuOpen && (
+                <div className="absolute top-full left-0 w-full bg-white shadow-lg p-4 flex flex-col gap-4 md:hidden">
+                    <button onClick={() => handleNavClick('home')} className="text-left font-semibold text-brand-text">{t('nav.home')}</button>
+                    <button onClick={() => handleNavClick('about')} className="text-left font-semibold text-brand-text">{t('nav.about')}</button>
+                    <button onClick={handleProductClick} className="text-left font-semibold text-brand-text">{t('nav.products')}</button>
+                </div>
+            )}
+        </motion.nav>
+    );
 };
