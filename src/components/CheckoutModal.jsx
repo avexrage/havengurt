@@ -124,6 +124,7 @@ export const CheckoutModal = ({ isOpen, onClose, cart, onClearCart }) => {
                                 total={total}
                                 onPaymentComplete={handlePaymentComplete}
                                 onDataChange={setPaymentData}
+                                paymentData={paymentData}
                             />
                         </div>
                     )}
