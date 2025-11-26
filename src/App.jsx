@@ -16,8 +16,6 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { LoginModal } from './components/auth/LoginModal';
 import { UserProfile } from './components/profile/UserProfile';
 
-import { TestDB } from './components/TestDB';
-
 const AppContent = () => {
   // ... existing state ...
   const [cart, setCart] = useState([]);
@@ -60,7 +58,6 @@ const AppContent = () => {
 
   return (
     <div className="font-sans text-brand-black antialiased selection:bg-brand-blue selection:text-white">
-      <TestDB />
       <Navbar
         cartCount={cart.reduce((acc, item) => acc + item.quantity, 0)}
         onOpenCart={() => setIsCartOpen(true)}
