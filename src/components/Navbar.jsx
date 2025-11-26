@@ -75,6 +75,32 @@ export const Navbar = ({ cartCount, onOpenCart, onNavigate, currentView, animate
                         )}
                     </AnimatePresence>
 
+                    {/* User Profile / Login Button */}
+                    {user ? (
+                        <div className="relative group">
+                            <button className="flex items-center gap-2 hover:bg-gray-50 p-1 pr-3 rounded-full transition-colors border border-transparent hover:border-gray-100">
+                                <div className="w-8 h-8 bg-brand-blue rounded-full flex items-center justify-center text-white text-xs font-bold overflow-hidden">
+                                    {user.avatar ? <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" /> : user.name.charAt(0)}
+                                </div>
+                                <span className="text-sm font-bold text-brand-black hidden md:block max-w-[100px] truncate">{user.name}</span>
+                            </button>
+                            {/* Dropdown */}
+                            <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden hidden group-hover:block p-1">
+                                <button onClick={() => onNavigate('profile')} className="w-full text-left px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 rounded-lg flex items-center gap-2">
+                                    <Icons.User size={16} /> Profile & Orders
+                                </button>
+                                <div className="h-px bg-gray-100 my-1"></div>
+                                <button onClick={() => window.location.reload()} className="w-full text-left px-4 py-2 text-sm font-semibold text-red-500 hover:bg-red-50 rounded-lg flex items-center gap-2">
+                                    <Icons.LogOut size={16} /> Logout
+                                </button>
+                            </div>
+                        </div>
+                    ) : (
+                        <button onClick={onLoginClick} className="hidden md:flex items-center gap-2 text-sm font-bold text-brand-black hover:text-brand-blue transition-colors">
+                            Login
+                        </button>
+                    )}
+
                     <button className="md:hidden text-brand-black" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                         <Icons.Menu />
                     </button>
@@ -86,7 +112,13 @@ export const Navbar = ({ cartCount, onOpenCart, onNavigate, currentView, animate
                 <div className="absolute top-full left-0 w-full bg-white shadow-lg p-4 flex flex-col gap-4 md:hidden">
                     <button onClick={() => handleNavClick('home')} className="text-left font-semibold text-brand-text">{t('nav.home')}</button>
                     <button onClick={() => handleNavClick('about')} className="text-left font-semibold text-brand-text">{t('nav.about')}</button>
+                    <button onClick={() => handleNavClick('about')} className="text-left font-semibold text-brand-text">{t('nav.about')}</button>
                     <button onClick={handleProductClick} className="text-left font-semibold text-brand-text">{t('nav.products')}</button>
+                    {user ? (
+                        <button onClick={() => handleNavClick('profile')} className="text-left font-semibold text-brand-blue">My Profile</button>
+                    ) : (
+                        <button onClick={() => { onLoginClick(); setMobileMenuOpen(false); }} className="text-left font-semibold text-brand-blue">Login / Sign Up</button>
+                    )}
                 </div>
             )}
         </motion.nav>

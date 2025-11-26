@@ -27,8 +27,7 @@ export const UserProfile = ({ onBack }) => {
                 // I didn't include it in the db.js write.
 
                 // Let's just fetch all and filter.
-                const allOrders = await db.getOrders();
-                const userOrders = allOrders.filter(o => o.userId === user.id);
+                const userOrders = await db.getUserOrders(user.id);
                 setOrders(userOrders);
             }
         };

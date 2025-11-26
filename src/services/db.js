@@ -6,6 +6,11 @@ export const db = {
         return await dbService.getAllOrders();
     },
 
+    // Get user specific orders
+    getUserOrders: async (userId) => {
+        return await dbService.getUserOrders(userId);
+    },
+
     // Save a new order
     saveOrder: async (orderData) => {
         return await dbService.addOrder({
