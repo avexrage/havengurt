@@ -5,7 +5,7 @@ import drinkImg from '../assets/images/ca.png';
 import scoopImg from '../assets/images/carica.jpg';
 import iceImg from '../assets/images/na.png';
 
-export const ProductSection = ({ onNavigate }) => {
+export const ProductSection = ({ onCategorySelect }) => {
     const { t } = useLanguage();
 
     const categories = [
@@ -42,7 +42,7 @@ export const ProductSection = ({ onNavigate }) => {
                         key={cat.id}
                         whileHover={{ scale: 1.02, zIndex: 10 }}
                         transition={{ duration: 0.4 }}
-                        onClick={() => onNavigate(cat.id)}
+                        onClick={() => onCategorySelect(cat.id)}
                         className="group relative h-full rounded-3xl overflow-hidden cursor-pointer shadow-lg"
                     >
                         {/* Background Image */}

@@ -41,48 +41,40 @@ export const Navbar = ({ cartCount, onOpenCart, onNavigate, currentView, animate
                     <button onClick={handleProductClick} className={`${currentView === 'products' ? 'text-brand-blue' : 'hover:text-brand-blue'} transition-colors`}>{t('nav.products')}</button>
                 </div>
 
-                <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleProductClick}
-                    className="btn-blue text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-lg hover:shadow-xl transition-all hidden md:block"
-                >
-                    {t('nav.shop')}
-                </motion.button>
-                <AnimatePresence>
-                    {cartCount > 0 && (
-                        <motion.button
-                            initial={{ scale: 0, opacity: 0 }}
-                            animate={animateCart ? { scale: [1, 1.5, 1], rotate: [0, 10, -10, 0] } : { scale: 1, opacity: 1 }}
-                            exit={{ scale: 0, opacity: 0 }}
-                            onClick={onOpenCart}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            className="relative p-2 text-brand-black hover:bg-brand-lightBlue rounded-full transition-colors"
-                        >
-                            <Icons.ShoppingBag />
-                            <span className="absolute -top-1 -right-1 w-5 h-5 bg-brand-blue text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">
-                                {cartCount}
-                            </span>
-                        </motion.button>
-                    )}
-                </AnimatePresence>
-
-                <button className="md:hidden text-brand-black" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                    <Icons.Menu />
-                </button>
-            </div>
-
-            {/* Mobile Menu Overlay */}
-            {
-                mobileMenuOpen && (
-                    <div className="absolute top-full left-0 w-full bg-white shadow-lg p-4 flex flex-col gap-4 md:hidden">
-                        <button onClick={() => handleNavClick('home')} className="text-left font-semibold text-brand-text">{t('nav.home')}</button>
-                        <button onClick={() => handleNavClick('about')} className="text-left font-semibold text-brand-text">{t('nav.about')}</button>
-                        <button onClick={handleProductClick} className="text-left font-semibold text-brand-text">{t('nav.products')}</button>
+                <div className="flex items-center gap-6">
+                    <div className="hidden md:flex items-center gap-2 text-sm font-bold">
+                        <button onClick={() => toggleLanguage('en')} className={`${language === 'en' ? 'text-brand-blue' : 'text-gray-400 hover:text-brand-blue'} transition-colors`}>EN</button>
+                        <span className="text-gray-300">|</span>
+                        <button onClick={() => toggleLanguage('id')} className={`${language === 'id' ? 'text-brand-blue' : 'text-gray-400 hover:text-brand-blue'} transition-colors`}>ID</button>
                     </div>
-                )
-            }
-        </motion.nav >
-    );
+
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={handleProductClick}
+                        className="btn-blue text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-lg hover:shadow-xl transition-all hidden md:block"
+                    >
+                        {t('nav.shop')}
+                    </motion.button>
+                    <AnimatePresence>
+                        {cartCount > 0 && (
+                            <motion.button
+                                initial={{ scale: 0, opacity: 0 }}
+                                animate={animateCart ? { scale: [1, 1.5, 1], rotate: [0, 10, -10, 0] } : { scale: 1, opacity: 1 }}
+                                exit={{ scale: 0, opacity: 0 }}
+                                onClick={onOpenCart}
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                className="relative p-2 text-brand-black hover:bg-brand-lightBlue rounded-full transition-colors"
+                            >
+                                <Icons.ShoppingBag />
+                                <span className="absolute -top-1 -right-1 w-5 h-5 bg-brand-blue text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">
+                                    {cartCount}
+                                    <button onClick={() => handleNavClick('about')} className="text-left font-semibold text-brand-text">{t('nav.about')}</button>
+                                    <button onClick={handleProductClick} className="text-left font-semibold text-brand-text">{t('nav.products')}</button>
+                                </div>
+                                )
+                }
+                            </motion.nav >
+                        );
 };

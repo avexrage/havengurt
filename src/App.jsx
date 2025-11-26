@@ -67,18 +67,20 @@ const AppContent = () => {
         onLoginClick={() => setIsLoginOpen(true)}
       />
 
-      {view === 'home' && (
-        <>
-          <HeroSection />
-          <QualitySection />
-          <ProductSection onCategorySelect={(cat) => {
+      {view === 'home' && <>
+        <HeroSection onNavigate={handleNavigate} />
+        <QualitySection />
+        <ProductSection
+          onCategorySelect={(cat) => {
             setProductCategory(cat);
             setView('products');
             window.scrollTo(0, 0);
-          }} />
-          <StoryPreviewSection />
-          <PartnersSection />
-        </>
+          }}
+          onNavigate={handleNavigate}
+        />
+        <StoryPreviewSection onNavigate={handleNavigate} />
+        <PartnersSection />
+      </>
       )}
 
       {view === 'about' && <About onBack={() => handleNavigate('home')} />}
@@ -88,7 +90,9 @@ const AppContent = () => {
           cart={cart}
           initialCategory={productCategory}
           onBack={() => setView('home')}
-          onAddToCart={addToCart}
+          initialCategory={productCategory}
+          onBack={() => setView('home')}
+          onAdd={addToCart}
           triggerCartAnimation={triggerCartAnimation}
         />
       )}
