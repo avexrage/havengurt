@@ -1,0 +1,26 @@
+import { dbService } from './firebase';
+
+export const db = {
+    // Get all orders (Admin)
+    getOrders: async () => {
+        return await dbService.getAllOrders();
+    },
+
+    // Save a new order
+    saveOrder: async (orderData) => {
+        return await dbService.addOrder({
+            status: 'Pending',
+            ...orderData
+        });
+    },
+
+    // Update order status
+    updateOrderStatus: async (id, status) => {
+        return await dbService.updateOrderStatus(id, status);
+    },
+
+    // Clear all orders (Not supported in Firebase client for safety, but we can keep the method signature)
+    clearOrders: () => {
+        console.warn("Clear orders not supported in production mode");
+    }
+};
