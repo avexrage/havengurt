@@ -85,14 +85,16 @@ export const Navbar = ({ cartCount, onOpenCart, onNavigate, currentView, animate
                                 <span className="text-sm font-bold text-brand-black hidden md:block max-w-[100px] truncate">{user.name}</span>
                             </button>
                             {/* Dropdown */}
-                            <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden hidden group-hover:block p-1">
-                                <button onClick={() => onNavigate('profile')} className="w-full text-left px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 rounded-lg flex items-center gap-2">
-                                    <Icons.User size={16} /> Profile & Orders
-                                </button>
-                                <div className="h-px bg-gray-100 my-1"></div>
-                                <button onClick={() => window.location.reload()} className="w-full text-left px-4 py-2 text-sm font-semibold text-red-500 hover:bg-red-50 rounded-lg flex items-center gap-2">
-                                    <Icons.LogOut size={16} /> Logout
-                                </button>
+                            <div className="absolute right-0 top-full pt-2 w-48 hidden group-hover:block z-50">
+                                <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden p-1">
+                                    <button onClick={() => onNavigate('profile')} className="w-full text-left px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 rounded-lg flex items-center gap-2">
+                                        <Icons.User size={16} /> Profile & Orders
+                                    </button>
+                                    <div className="h-px bg-gray-100 my-1"></div>
+                                    <button onClick={() => window.location.reload()} className="w-full text-left px-4 py-2 text-sm font-semibold text-red-500 hover:bg-red-50 rounded-lg flex items-center gap-2">
+                                        <Icons.LogOut size={16} /> Logout
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     ) : (

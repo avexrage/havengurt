@@ -35,7 +35,8 @@ export const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
             onClose();
             if (onLoginSuccess) onLoginSuccess();
         } catch (err) {
-            setError('Google Login Failed');
+            console.error("Google Login Error:", err);
+            setError(err.message || 'Google Login Failed');
         }
     };
 

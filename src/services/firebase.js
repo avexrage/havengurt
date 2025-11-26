@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, doc, updateDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, doc, updateDoc, setDoc, getDoc } from 'firebase/firestore';
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -51,5 +51,38 @@ export const dbService = {
     updateOrderStatus: async (orderId, status) => {
         const orderRef = doc(db, "orders", orderId);
         await updateDoc(orderRef, { status });
+    },
+
+    // Save User
+    saveUser: async (user) => {
+        try {
+            const userRef = doc(db, "users", user.id);
+            await setDoc(userRef, {
+                name: user.name,
+                email: user.email,
+                avatar: user.avatar,
+                lastLogin: new Date().toISOString(),
+                ...user // Spread other properties if any
+            }, { merge: true });
+        } catch (e) {
+            console.error("Error saving user: ", e);
+            throw e;
+        }
+    },
+
+    // Get User
+    getUser: async (userId) => {
+        try {
+            const userRef = doc(db, "users", userId);
+            const docSnap = await getDoc(userRef);
+            if (docSnap.exists()) {
+                return { id: docSnap.id, ...docSnap.data() };
+            } else {
+                return null;
+            }
+        } catch (e) {
+            console.error("Error getting user: ", e);
+            throw e;
+        }
     }
 };
