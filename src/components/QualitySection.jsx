@@ -110,4 +110,18 @@ export const QualitySection = () => {
                                         </div>
                                     </div>
                                 ))}
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+
+                <div className="text-center">
+                    <a href="/yogurt_lab_report.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-brand-blue font-bold text-sm hover:text-brand-darkBlue transition-colors group">
+                        <Icons.FileText size={18} />
+                        <span className="group-hover:underline">{t('quality.report')}</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    );
 };
