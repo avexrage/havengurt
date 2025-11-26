@@ -38,6 +38,7 @@ export const Navbar = ({ cartCount, onOpenCart, onNavigate, currentView, animate
                 <div className="hidden md:flex items-center gap-10 text-sm font-semibold text-brand-text">
                     <button onClick={() => handleNavClick('home')} className={`${currentView === 'home' ? 'text-brand-blue' : 'hover:text-brand-blue'} transition-colors`}>{t('nav.home')}</button>
                     <button onClick={() => handleNavClick('about')} className={`${currentView === 'about' ? 'text-brand-blue' : 'hover:text-brand-blue'} transition-colors`}>{t('nav.about')}</button>
+                    <button onClick={handleProductClick} className={`${currentView === 'products' ? 'text-brand-blue' : 'hover:text-brand-blue'} transition-colors`}>{t('nav.products')}</button>
                 </div>
 
                 <motion.button
