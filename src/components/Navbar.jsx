@@ -96,7 +96,8 @@ export const Navbar = ({ cartCount, onOpenCart, onNavigate, currentView, animate
                             </div>
                         </div>
                     ) : (
-                        <button onClick={onLoginClick} className="hidden md:flex items-center gap-2 text-sm font-bold text-brand-black hover:text-brand-blue transition-colors">
+                        <button onClick={onLoginClick} className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full border-2 border-brand-blue text-brand-blue font-bold hover:bg-brand-blue hover:text-white transition-all shadow-sm">
+                            <Icons.User size={18} />
                             Login
                         </button>
                     )}

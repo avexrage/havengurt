@@ -18,13 +18,13 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const login = async (email, password) => {
-        const user = auth.login(email, password);
+        const user = await auth.login(email, password);
         setUser(user);
         return user;
     };
 
     const register = async (name, email, password) => {
-        const user = auth.register(name, email, password);
+        const user = await auth.register(name, email, password);
         setUser(user);
         return user;
     };
