@@ -67,20 +67,21 @@ const AppContent = () => {
         onLoginClick={() => setIsLoginOpen(true)}
       />
 
-      {view === 'home' && <>
-        <HeroSection onNavigate={handleNavigate} />
-        <QualitySection />
-        <ProductSection
-          onCategorySelect={(cat) => {
-            setProductCategory(cat);
-            setView('products');
-            window.scrollTo(0, 0);
-          }}
-          onNavigate={handleNavigate}
-        />
-        <StoryPreviewSection onNavigate={handleNavigate} />
-        <PartnersSection />
-      </>
+      {view === 'home' && (
+        <>
+          <HeroSection onNavigate={handleNavigate} />
+          <QualitySection />
+          <ProductSection
+            onCategorySelect={(cat) => {
+              setProductCategory(cat);
+              setView('products');
+              window.scrollTo(0, 0);
+            }}
+            onNavigate={handleNavigate}
+          />
+          <StoryPreviewSection onNavigate={handleNavigate} />
+          <PartnersSection />
+        </>
       )}
 
       {view === 'about' && <About onBack={() => handleNavigate('home')} />}
@@ -88,8 +89,6 @@ const AppContent = () => {
       {view === 'products' && (
         <ProductsPage
           cart={cart}
-          initialCategory={productCategory}
-          onBack={() => setView('home')}
           initialCategory={productCategory}
           onBack={() => setView('home')}
           onAdd={addToCart}
