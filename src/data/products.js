@@ -8,6 +8,8 @@ import na from '../assets/images/na.png';
 import co from '../assets/images/co.png';
 import me from '../assets/images/me.png';
 
+import cup from '../assets/images/cups.png';
+
 export const PRODUCTS = [
     // CATEGORY A: DRINK YOGURT
     { id: 1, name: "Drink Yogurt Original", category: "drink", price: 15000, img: ori, desc: "Classic creamy yogurt drink.", color: "#A5E5FF", textColor: "#115AA6", bgColor: "#F0F9FF" },
@@ -22,7 +24,7 @@ export const PRODUCTS = [
 
     // CATEGORY B: SCOOP YOGURT
     { id: 5, name: "Plain Yogurt", category: "scoop", price: 25000, img: plain, desc: "Light, creamy texture.", color: "#A5E5FF", textColor: "#115AA6", bgColor: "#F0F9FF" },
-    { id: 11, name: "Yogurt Carica Cup", category: "scoop", price: 28000, img: carica, desc: "Scoopable delight with Carica chunks.", color: "#FFD734", textColor: "#000000", bgColor: "#FFFBEB" },
+    { id: 11, name: "Yogurt Carica Cup", category: "scoop", price: 28000, img: cup, desc: "Scoopable delight with Carica chunks.", color: "#FFD734", textColor: "#000000", bgColor: "#FFFBEB" },
 
     // CATEGORY C: ICE LOLLY
     { id: 7, name: "Ice Lolly Yogurt Carica", category: "ice", price: 5000, img: ca, desc: "Frozen delight.", color: "#FFD734", textColor: "#000000", bgColor: "#FFFBEB" },
