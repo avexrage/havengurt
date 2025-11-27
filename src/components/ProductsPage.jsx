@@ -86,7 +86,19 @@ export const ProductsPage = ({ cart, onAdd, onBack, initialCategory = 'all' }) =
                         </motion.div>
                     </AnimatePresence>
                 </div>
-                {hasMore && <div className="mt-12 text-center"><button onClick={() => setDisplayedProducts(prev => prev + 8)} className="px-8 py-3 border border-brand-blue text-brand-blue rounded-full font-semibold hover:bg-brand-lightBlue transition-colors">{t('products.showMore')}</button></div>}
+                <AnimatePresence>
+                    {hasMore && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            className="mt-12 text-center"
+                        >
+                            <button onClick={() => setDisplayedProducts(prev => prev + 8)} className="px-8 py-3 border border-brand-blue text-brand-blue rounded-full font-semibold hover:bg-brand-lightBlue transition-colors">{t('products.showMore')}</button>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 {/* Back Button */}
                 <div className="text-center mt-16">
