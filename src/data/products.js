@@ -22,7 +22,7 @@ export const PRODUCTS = [
 
     // CATEGORY B: SCOOP YOGURT
     { id: 5, name: "Plain Yogurt", category: "scoop", price: 25000, img: plain, desc: "Light, creamy texture.", color: "#A5E5FF", textColor: "#115AA6", bgColor: "#F0F9FF" },
-    { id: 11, name: "Yogurt Carica Cup", category: "scoop", price: 28000, img: "https://images.unsplash.com/photo-1571212515416-f786d79a8388?auto=format&fit=crop&w=600&q=80", desc: "Scoopable delight with Carica chunks.", color: "#FFD734", textColor: "#000000", bgColor: "#FFFBEB" },
+    { id: 11, name: "Yogurt Carica Cup", category: "scoop", price: 28000, img: carica, desc: "Scoopable delight with Carica chunks.", color: "#FFD734", textColor: "#000000", bgColor: "#FFFBEB" },
 
     // CATEGORY C: ICE LOLLY
     { id: 7, name: "Ice Lolly Yogurt Carica", category: "ice", price: 5000, img: ca, desc: "Frozen delight.", color: "#FFD734", textColor: "#000000", bgColor: "#FFFBEB" },
