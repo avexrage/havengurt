@@ -3,10 +3,7 @@ import { motion } from 'framer-motion';
 import { Icons } from './Icons';
 import { useLanguage } from '../context/LanguageContext';
 
-import havenImg from '../assets/images/haven.jpg';
-
-// TODO: Replace with actual djawa.jpg when available
-const djawaImg = havenImg;
+import djawaImg from '../assets/images/djawa.jpg';
 
 const partnerImages = {
     djawa: djawaImg
