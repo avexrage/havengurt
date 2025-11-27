@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import heroImage from '../assets/images/hero-image.jpg';
+import heroImage from '../assets/images/hero.png';
 import { useLanguage } from '../context/LanguageContext';
 
 export const HeroSection = ({ onNavigate }) => {
