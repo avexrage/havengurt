@@ -134,7 +134,6 @@ const AppContent = () => {
           initialCategory={productCategory}
           onBack={() => setView('home')}
           onAdd={addToCart}
-          triggerCartAnimation={triggerCartAnimation}
         />
       )}
 
