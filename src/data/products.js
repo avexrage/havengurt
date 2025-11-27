@@ -12,16 +12,16 @@ export const PRODUCTS = [
     // CATEGORY A: DRINK YOGURT
     { id: 1, name: "Drink Yogurt Original", category: "drink", price: 15000, img: ori, desc: "Classic creamy yogurt drink.", color: "#A5E5FF", textColor: "#115AA6", bgColor: "#F0F9FF" },
     { id: 2, name: "Drink Yogurt Carica", category: "drink", price: 18000, img: carica, desc: "Signature Carica fruit blend.", featured: true, color: "#FFD734", textColor: "#000000", bgColor: "#FFFBEB" },
-    { id: 6, name: "Drink Yogurt Carica Low Sugar", category: "drink", price: 19000, img: "https://images.unsplash.com/photo-1626139593888-25d4816be113?auto=format&fit=crop&w=600&q=80", desc: "Less sugar, same great Carica taste.", color: "#7ED957", textColor: "#064E3B", bgColor: "#F0FDF4" },
+    { id: 6, name: "Drink Yogurt Carica Less Sugar", category: "drink", price: 19000, img: carica, desc: "Less sugar, same great Carica taste.", color: "#7ED957", textColor: "#064E3B", bgColor: "#F0FDF4", badge: "Less Sugar" },
 
     { id: 3, name: "Drink Yogurt Dragon Fruit", category: "drink", price: 17000, img: naga, desc: "Vibrant dragon fruit flavor.", color: "#D43259", textColor: "#FFFFFF", bgColor: "#FFF1F2" },
-    { id: 9, name: "Drink Yogurt Dragon Fruit Low Sugar", category: "drink", price: 18000, img: "https://images.unsplash.com/photo-1627303350314-e53b47f44b0d?auto=format&fit=crop&w=600&q=80", desc: "Lighter, low sugar dragon fruit.", color: "#7ED957", textColor: "#064E3B", bgColor: "#F0FDF4" },
+    { id: 9, name: "Drink Yogurt Dragon Fruit Less Sugar", category: "drink", price: 18000, img: naga, desc: "Lighter, less sugar dragon fruit.", color: "#7ED957", textColor: "#064E3B", bgColor: "#F0FDF4", badge: "Less Sugar" },
 
     { id: 4, name: "Drink Yogurt Mango", category: "drink", price: 17000, img: mango, desc: "Sweet tropical mango.", color: "#FFD734", textColor: "#000000", bgColor: "#FFFBEB" },
-    { id: 10, name: "Drink Yogurt Mango Low Sugar", category: "drink", price: 18000, img: "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?auto=format&fit=crop&w=600&q=80", desc: "Guilt-free mango goodness.", color: "#7ED957", textColor: "#064E3B", bgColor: "#F0FDF4" },
+    { id: 10, name: "Drink Yogurt Mango Less Sugar", category: "drink", price: 18000, img: mango, desc: "Guilt-free mango goodness.", color: "#7ED957", textColor: "#064E3B", bgColor: "#F0FDF4", badge: "Less Sugar" },
 
     // CATEGORY B: SCOOP YOGURT
-    { id: 5, name: "Plain Yogurt", category: "scoop", price: 25000, img: plain, desc: "Thick, Greek-style texture.", color: "#A5E5FF", textColor: "#115AA6", bgColor: "#F0F9FF" },
+    { id: 5, name: "Plain Yogurt", category: "scoop", price: 25000, img: plain, desc: "Light, creamy texture.", color: "#A5E5FF", textColor: "#115AA6", bgColor: "#F0F9FF" },
     { id: 11, name: "Yogurt Carica Cup", category: "scoop", price: 28000, img: "https://images.unsplash.com/photo-1571212515416-f786d79a8388?auto=format&fit=crop&w=600&q=80", desc: "Scoopable delight with Carica chunks.", color: "#FFD734", textColor: "#000000", bgColor: "#FFFBEB" },
 
     // CATEGORY C: ICE LOLLY

@@ -63,6 +63,11 @@ export const ProductsPage = ({ cart, onAdd, onBack, initialCategory = 'all' }) =
                                     <div key={product.id} className="group bg-white rounded-3xl shadow-card hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col hover:-translate-y-2">
                                         <div className="h-64 relative flex items-center justify-center p-6 transition-colors duration-500" style={{ backgroundColor: product.bgColor }}>
                                             <img src={product.img} alt={product.name} className="h-full w-auto object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500" />
+                                            {product.badge && (
+                                                <div className="absolute top-4 left-4 bg-[#7ED957] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                                                    {product.badge}
+                                                </div>
+                                            )}
                                             {qty > 0 && <div className="absolute top-4 right-4 bg-brand-black text-white text-xs font-bold w-8 h-8 flex items-center justify-center rounded-full shadow-lg">{qty}</div>}
                                         </div>
                                         <div className="p-6 flex-grow flex flex-col">
