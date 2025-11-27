@@ -99,9 +99,15 @@ export const translations = {
             titleHighlight: "Find Us",
             description: "Visit our trusted partners across Wonosobo for fresh Havengurt products",
             items: [
-                { name: "Resto Dieng", type: "Restaurant & Cafe", loc: "Jl. Raya Dieng, Wonosobo" },
-                { name: "Oleh-Oleh Wonosobo", type: "Souvenir Shop", loc: "Pusat Kota Wonosobo" },
-                { name: "Healthy Mart", type: "Health Food Store", loc: "Jl. Ahmad Yani, Wonosobo" }
+                { id: "dieng", name: "Resto Dieng", type: "Restaurant & Cafe", loc: "Jl. Raya Dieng, Wonosobo" },
+                {
+                    id: "djawa",
+                    name: "Djawa Snack",
+                    type: "Souvenir Shop",
+                    loc: "Jl. Pasukan Ronggolawe No.20, Wonosobo",
+                    link: "https://www.google.com/maps/place/Djawasnack/@-7.3541086,109.9058327,20z/data=!4m6!3m5!1s0x2e7aa14aec4381a9:0x3241ba79aa87611a!8m2!3d-7.3538419!4d109.9059105!16s%2Fg%2F11fnx1v4xy?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D"
+                },
+                { id: "healthy", name: "Healthy Mart", type: "Health Food Store", loc: "Jl. Ahmad Yani, Wonosobo" }
             ],
             notFound: {
                 title: "Can't find us nearby?",
@@ -227,9 +233,15 @@ export const translations = {
             titleHighlight: "Menemukan Kami",
             description: "Kunjungi mitra terpercaya kami di seluruh Wonosobo untuk produk Havengurt segar",
             items: [
-                { name: "Resto Dieng", type: "Restoran & Kafe", loc: "Jl. Raya Dieng, Wonosobo" },
-                { name: "Oleh-Oleh Wonosobo", type: "Toko Oleh-Oleh", loc: "Pusat Kota Wonosobo" },
-                { name: "Healthy Mart", type: "Toko Makanan Sehat", loc: "Jl. Ahmad Yani, Wonosobo" }
+                { id: "dieng", name: "Resto Dieng", type: "Restoran & Kafe", loc: "Jl. Raya Dieng, Wonosobo" },
+                {
+                    id: "djawa",
+                    name: "Djawa Snack",
+                    type: "Toko Oleh-Oleh",
+                    loc: "Jl. Pasukan Ronggolawe No.20, Wonosobo",
+                    link: "https://www.google.com/maps/place/Djawasnack/@-7.3541086,109.9058327,20z/data=!4m6!3m5!1s0x2e7aa14aec4381a9:0x3241ba79aa87611a!8m2!3d-7.3538419!4d109.9059105!16s%2Fg%2F11fnx1v4xy?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D"
+                },
+                { id: "healthy", name: "Healthy Mart", type: "Toko Makanan Sehat", loc: "Jl. Ahmad Yani, Wonosobo" }
             ],
             notFound: {
                 title: "Tidak dapat menemukan kami di dekat Anda?",
