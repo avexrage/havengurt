@@ -26,16 +26,38 @@ const AppContent = () => {
   const [productCategory, setProductCategory] = useState('all');
   const { user } = useAuth();
 
-  const [animateCart, setAnimateCart] = useState(false);
-
-  const triggerCartAnimation = () => {
-    setAnimateCart(true);
-    setTimeout(() => setAnimateCart(false), 500);
-  };
+  const [flyingParticles, setFlyingParticles] = useState([]);
 
   const addToCart = (product, change, e) => {
-    if (e) e.stopPropagation();
-    if (change > 0) triggerCartAnimation();
+    if (e) {
+      e.stopPropagation();
+      // Trigger flying animation only when adding (change > 0)
+      if (change > 0) {
+        const rect = e.target.getBoundingClientRect();
+        const startX = rect.left + rect.width / 2;
+        const startY = rect.top + rect.height / 2;
+
+        // Cart icon position (approximate, or we could use a ref if we passed it down)
+        // Assuming cart is top-right. We'll target a fixed position or try to get element.
+        const cartBtn = document.getElementById('cart-btn');
+        let endX = window.innerWidth - 50; // Fallback
+        let endY = 40; // Fallback
+
+        if (cartBtn) {
+          const cartRect = cartBtn.getBoundingClientRect();
+          endX = cartRect.left + cartRect.width / 2;
+          endY = cartRect.top + cartRect.height / 2;
+        }
+
+        const id = Date.now();
+        setFlyingParticles(prev => [...prev, { id, startX, startY, endX, endY }]);
+
+        // Remove particle after animation
+        setTimeout(() => {
+          setFlyingParticles(prev => prev.filter(p => p.id !== id));
+        }, 800);
+      }
+    }
 
     setCart(prev => {
       const existing = prev.find(item => item.id === product.id);
@@ -57,13 +79,32 @@ const AppContent = () => {
   };
 
   return (
-    <div className="font-sans text-brand-black antialiased selection:bg-brand-blue selection:text-white">
+    <div className="font-sans text-brand-black antialiased selection:bg-brand-blue selection:text-white relative">
+      {/* Flying Particles */}
+      {flyingParticles.map(p => (
+        <div
+          key={p.id}
+          className="fixed z-[9999] w-4 h-4 bg-brand-blue rounded-full pointer-events-none shadow-lg"
+          style={{
+            left: p.startX,
+            top: p.startY,
+            animation: `flyToCart 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards`
+          }}
+        />
+      ))}
+      <style>{`
+        @keyframes flyToCart {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(calc(${flyingParticles[0]?.endX || 0}px - ${flyingParticles[0]?.startX || 0}px), calc(${flyingParticles[0]?.endY || 0}px - ${flyingParticles[0]?.startY || 0}px)) scale(0.2); opacity: 0; }
+        }
+      `}</style>
+
       <Navbar
         cartCount={cart.reduce((acc, item) => acc + item.quantity, 0)}
         onOpenCart={() => setIsCartOpen(true)}
         onNavigate={handleNavigate}
         currentView={view}
-        animateCart={animateCart}
+        animateCart={false} // Static cart
         user={user}
         onLoginClick={() => setIsLoginOpen(true)}
       />
