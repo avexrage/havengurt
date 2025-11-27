@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import drinkImg from '../assets/images/drinks.png';
 import scoopImg from '../assets/images/cups.png';
-import iceImg from '../assets/images/lolly.png';
+import iceImg from '../assets/images/lollies.png';
 
 export const ProductSection = ({ onCategorySelect }) => {
     const { t } = useLanguage();
