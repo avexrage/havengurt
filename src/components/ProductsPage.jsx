@@ -47,15 +47,15 @@ export const ProductsPage = ({ cart, onAdd, onBack, initialCategory = 'all' }) =
                         ))}
                     </div>
                 </div>
-                <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 min-h-[500px]">
+                <div className="min-h-[500px]">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeCategory}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.15 }}
-                            className="contents"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
                         >
                             {visibleProducts.map(product => {
                                 const qty = cart.find(item => item.id === product.id)?.quantity || 0;
@@ -85,7 +85,7 @@ export const ProductsPage = ({ cart, onAdd, onBack, initialCategory = 'all' }) =
                             })}
                         </motion.div>
                     </AnimatePresence>
-                </motion.div>
+                </div>
                 {hasMore && <div className="mt-12 text-center"><button onClick={() => setDisplayedProducts(prev => prev + 8)} className="px-8 py-3 border border-brand-blue text-brand-blue rounded-full font-semibold hover:bg-brand-lightBlue transition-colors">{t('products.showMore')}</button></div>}
 
                 {/* Back Button */}
