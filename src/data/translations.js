@@ -22,7 +22,7 @@ export const translations = {
             history: {
                 1: {
                     title: "The Innovation",
-                    description: "Started at SMAN 2 Wonosobo by students Silvia Wulandari & Kenaya Putri, guided by Chemistry teacher Mrs. Trining Puspitaningsih for the Krenova competition.",
+                    description: "Started at SMAN 2 Wonosobo by students Najaah Azmi Fajri & Arinda Elza Wulandiny, guided by Chemistry teacher Mrs. Trining Puspitaningsih Jatmiko for the Krenova competition.",
                     highlight: "1st Place Winner"
                 },
                 2: {
@@ -99,7 +99,6 @@ export const translations = {
             titleHighlight: "Find Us",
             description: "Visit our trusted partners across Wonosobo for fresh Havengurt products",
             items: [
-                { id: "dieng", name: "Resto Dieng", type: "Restaurant & Cafe", loc: "Jl. Raya Dieng, Wonosobo" },
                 {
                     id: "djawa",
                     name: "Djawa Snack",
@@ -107,7 +106,13 @@ export const translations = {
                     loc: "Jl. Pasukan Ronggolawe No.20, Wonosobo",
                     link: "https://www.google.com/maps/place/Djawasnack/@-7.3541086,109.9058327,20z/data=!4m6!3m5!1s0x2e7aa14aec4381a9:0x3241ba79aa87611a!8m2!3d-7.3538419!4d109.9059105!16s%2Fg%2F11fnx1v4xy?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D"
                 },
-                { id: "healthy", name: "Healthy Mart", type: "Health Food Store", loc: "Jl. Ahmad Yani, Wonosobo" }
+                {
+                    id: "partnership",
+                    name: "Become a Partner",
+                    type: "Business Opportunity",
+                    loc: "Join our network",
+                    link: "https://wa.me/6285161052901?text=I%20am%20interested%20in%20partnership"
+                }
             ],
             notFound: {
                 title: "Can't find us nearby?",
@@ -156,7 +161,7 @@ export const translations = {
             history: {
                 1: {
                     title: "Inovasi",
-                    description: "Dimulai di SMAN 2 Wonosobo oleh siswa Silvia Wulandari & Kenaya Putri, dibimbing oleh guru Kimia Ibu Trining Puspitaningsih untuk kompetisi Krenova.",
+                    description: "Dimulai di SMAN 2 Wonosobo oleh siswa Najaah Azmi Fajri & Arinda Elza Wulandiny, dibimbing oleh guru Kimia Ibu Trining Puspitaningsih Jatmiko untuk kompetisi Krenova.",
                     highlight: "Juara 1"
                 },
                 2: {
@@ -233,7 +238,6 @@ export const translations = {
             titleHighlight: "Menemukan Kami",
             description: "Kunjungi mitra terpercaya kami di seluruh Wonosobo untuk produk Havengurt segar",
             items: [
-                { id: "dieng", name: "Resto Dieng", type: "Restoran & Kafe", loc: "Jl. Raya Dieng, Wonosobo" },
                 {
                     id: "djawa",
                     name: "Djawa Snack",
@@ -241,7 +245,13 @@ export const translations = {
                     loc: "Jl. Pasukan Ronggolawe No.20, Wonosobo",
                     link: "https://www.google.com/maps/place/Djawasnack/@-7.3541086,109.9058327,20z/data=!4m6!3m5!1s0x2e7aa14aec4381a9:0x3241ba79aa87611a!8m2!3d-7.3538419!4d109.9059105!16s%2Fg%2F11fnx1v4xy?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D"
                 },
-                { id: "healthy", name: "Healthy Mart", type: "Toko Makanan Sehat", loc: "Jl. Ahmad Yani, Wonosobo" }
+                {
+                    id: "partnership",
+                    name: "Gabung Mitra Kami",
+                    type: "Peluang Bisnis",
+                    loc: "Bergabung dengan jaringan kami",
+                    link: "https://wa.me/6285161052901?text=Saya%20tertarik%20untuk%20bermitra"
+                }
             ],
             notFound: {
                 title: "Tidak dapat menemukan kami di dekat Anda?",
