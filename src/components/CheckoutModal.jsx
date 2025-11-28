@@ -47,33 +47,39 @@ export const CheckoutModal = ({ isOpen, onClose, cart, onClearCart }) => {
         }
     };
 
-    const handlePaymentComplete = () => {
+    const handlePaymentComplete = async () => {
         setIsProcessing(true);
 
-        // Save to Database
-        const orderData = {
-            userId: user ? user.id : null, // Link to user if logged in
-            customer: {
-                addressDetail: deliveryInfo.addressDetail,
-                distance: deliveryInfo.distance,
-                coordinates: deliveryInfo.coordinates // Assuming DeliveryMap passes this if needed, or just rely on distance
-            },
-            items: cart,
-            payment: {
-                total: total,
-                method: 'QRIS',
-                senderName: paymentData.senderName,
-                // proofImage: paymentData.proofFile // In a real app, upload this first
-            },
-            deliveryDate: selectedDate.toISOString()
-        };
+        try {
+            // Save to Database
+            const orderData = {
+                userId: user ? user.id : null, // Link to user if logged in
+                customer: {
+                    addressDetail: deliveryInfo.addressDetail,
+                    distance: deliveryInfo.distance,
+                    coordinates: deliveryInfo.coordinates // Assuming DeliveryMap passes this if needed, or just rely on distance
+                },
+                items: cart,
+                payment: {
+                    total: total,
+                    method: 'QRIS',
+                    senderName: paymentData.senderName,
+                    // proofImage: paymentData.proofFile // In a real app, upload this first
+                },
+                deliveryDate: selectedDate.toISOString()
+            };
 
-        db.saveOrder(orderData);
+            await db.saveOrder(orderData);
 
-        setTimeout(() => {
+            setTimeout(() => {
+                setIsProcessing(false);
+                setStep(STEPS.SUCCESS);
+            }, 1500);
+        } catch (error) {
+            console.error("Failed to save order:", error);
+            alert("Failed to place order. Please try again.");
             setIsProcessing(false);
-            setStep(STEPS.SUCCESS);
-        }, 1500);
+        }
     };
 
     const handleClose = () => {
