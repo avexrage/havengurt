@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Icons } from '../Icons';
 import { useLanguage } from '../../context/LanguageContext';
 
-export const Profile = ({ onClose }) => {
+export const ProfileModal = ({ onClose }) => {
     const { user, logout } = useAuth();
     const { t } = useLanguage();
     const [orders, setOrders] = useState([]);
