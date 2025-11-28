@@ -105,7 +105,7 @@ export const Navbar = ({ cartCount, onOpenCart, onNavigate, currentView, animate
                         <button onClick={() => handleNavClick('about')} className="text-left font-semibold text-brand-text">{t('nav.about')}</button>
                         <button onClick={handleProductClick} className="text-left font-semibold text-brand-text">{t('nav.products')}</button>
                         {user ? (
-                            <button onClick={() => handleNavClick('profile')} className="text-left font-semibold text-brand-blue">My Profile</button>
+                            <button onClick={() => { onProfileClick(); setMobileMenuOpen(false); }} className="text-left font-semibold text-brand-blue">My Profile</button>
                         ) : (
                             <button onClick={() => { onLoginClick(); setMobileMenuOpen(false); }} className="text-left font-semibold text-brand-blue">Login / Sign Up</button>
                         )}
