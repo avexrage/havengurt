@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { PRODUCTS } from '../data/products';
+import { db } from '../services/db';
+import { productImages } from '../utils/imageMapping';
 import { useLanguage } from '../context/LanguageContext';
 import { Icons } from './Icons';
 
 export const ProductsPage = ({ cart, onAdd, onBack, initialCategory = 'all' }) => {
     const [activeCategory, setActiveCategory] = useState(initialCategory);
     const [displayedProducts, setDisplayedProducts] = useState(8);
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
     const { t } = useLanguage();
 
     useEffect(() => {
@@ -14,7 +17,30 @@ export const ProductsPage = ({ cart, onAdd, onBack, initialCategory = 'all' }) =
         if (initialCategory) setActiveCategory(initialCategory);
     }, [initialCategory]);
 
-    const filteredProducts = activeCategory === "all" ? PRODUCTS : PRODUCTS.filter(p => p.category === activeCategory);
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const data = await db.getProducts();
+                if (data && data.length > 0) {
+                    // Map images
+                    const mappedProducts = data.map(p => ({
+                        ...p,
+                        img: productImages[p.imgKey] || productImages["ori"]
+                    }));
+                    // Sort by ID to keep order consistent
+                    mappedProducts.sort((a, b) => a.id - b.id);
+                    setProducts(mappedProducts);
+                }
+            } catch (error) {
+                console.error("Failed to fetch products:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchProducts();
+    }, []);
+
+    const filteredProducts = activeCategory === "all" ? products : products.filter(p => p.category === activeCategory);
     const visibleProducts = filteredProducts.slice(0, displayedProducts);
     const hasMore = filteredProducts.length > displayedProducts;
 
@@ -27,6 +53,14 @@ export const ProductsPage = ({ cart, onAdd, onBack, initialCategory = 'all' }) =
             default: return cat;
         }
     };
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-white pt-32 flex justify-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-blue"></div>
+            </div>
+        );
+    }
 
     return (
         <motion.div
