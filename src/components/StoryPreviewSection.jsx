@@ -10,7 +10,7 @@ export const StoryPreviewSection = ({ onNavigate }) => {
             className="py-24 border-t border-blue-50 bg-cover bg-center relative"
             style={{ backgroundImage: `url(${bgstory})` }}
         >
-            <div className="absolute inset-0 bg-white/90"></div>
+            <div className="absolute inset-0 bg-white/60"></div>
             <div className="container mx-auto px-6 text-center relative z-10">
                 <h2 className="text-3xl font-bold text-brand-black mb-6">{t('storyPreview.title')} <span className="text-brand-blue">{t('storyPreview.titleHighlight')}</span></h2>
                 <p className="text-brand-text max-w-2xl mx-auto mb-8">{t('storyPreview.description')}</p>
