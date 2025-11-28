@@ -4,7 +4,7 @@ import { Icons } from './Icons';
 import { Logo } from './ui/Logo';
 import { useLanguage } from '../context/LanguageContext';
 
-export const Navbar = ({ cartCount, onOpenCart, onNavigate, currentView, animateCart, user, onLoginClick }) => {
+export const Navbar = ({ cartCount, onOpenCart, onNavigate, currentView, animateCart, user, onLoginClick, onProfileClick }) => {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const { language, toggleLanguage, t } = useLanguage();
@@ -56,6 +56,22 @@ export const Navbar = ({ cartCount, onOpenCart, onNavigate, currentView, animate
                     >
                         {t('nav.shop')}
                     </motion.button>
+
+                    {user ? (
+                        <button onClick={onProfileClick} className="hidden md:block w-10 h-10 rounded-full bg-gray-100 overflow-hidden border border-gray-200 hover:border-brand-blue transition-colors">
+                            {user.avatar ? (
+                                <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
+                            ) : (
+                                <div className="w-full h-full flex items-center justify-center text-brand-blue font-bold">
+                                    {user.name?.charAt(0).toUpperCase()}
+                                </div>
+                            )}
+                        </button>
+                    ) : (
+                        <button onClick={onLoginClick} className="hidden md:block text-sm font-bold text-brand-blue hover:text-brand-darkBlue transition-colors">
+                            Login
+                        </button>
+                    )}
                     <AnimatePresence>
                         {cartCount > 0 && (
                             <motion.button

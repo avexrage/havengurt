@@ -14,7 +14,7 @@ import { ProductsPage } from './components/ProductsPage';
 import { LanguageProvider } from './context/LanguageContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { LoginModal } from './components/auth/LoginModal';
-import { UserProfile } from './components/profile/UserProfile';
+import { ProfileModal } from './components/profile/ProfileModal';
 
 const AppContent = () => {
   // ... existing state ...
@@ -22,7 +22,8 @@ const AppContent = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [view, setView] = useState('home'); // 'home', 'about', 'products', 'admin', 'profile'
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [view, setView] = useState('home'); // 'home', 'about', 'products', 'admin'
   const [productCategory, setProductCategory] = useState('all');
   const { user } = useAuth();
 
@@ -107,6 +108,7 @@ const AppContent = () => {
         animateCart={false} // Static cart
         user={user}
         onLoginClick={() => setIsLoginOpen(true)}
+        onProfileClick={() => setIsProfileOpen(true)}
       />
 
       {view === 'home' && (
@@ -141,10 +143,6 @@ const AppContent = () => {
         <AdminDashboard onBack={() => setView('home')} />
       )}
 
-      {view === 'profile' && (
-        <UserProfile onBack={() => setView('home')} />
-      )}
-
       <Footer onNavigate={handleNavigate} onAdminClick={() => {
         setView('admin');
         window.scrollTo(0, 0);
@@ -177,6 +175,10 @@ const AppContent = () => {
           // Optional: Show success toast or redirect
         }}
       />
+
+      {isProfileOpen && (
+        <ProfileModal onClose={() => setIsProfileOpen(false)} />
+      )}
     </div>
   );
 };
