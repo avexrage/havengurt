@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { db } from '../services/db';
 import { format } from 'date-fns';
 import { Icons } from './Icons';
+import { PRODUCTS } from '../data/products';
 
 export const AdminDashboard = ({ onBack }) => {
     const [orders, setOrders] = useState([]);
@@ -27,6 +28,25 @@ export const AdminDashboard = ({ onBack }) => {
         }
     };
 
+    const handleSeedData = async () => {
+        if (window.confirm('This will overwrite product data in the database with the local file data. Continue?')) {
+            // Map products to include imgKey
+            // We need to manually map IDs to keys because we can't reverse lookup easily from the imported object
+            const imgKeyMap = {
+                1: "ori", 2: "carica", 6: "carica", 3: "naga", 9: "naga", 4: "mango", 10: "mango",
+                5: "plain", 11: "cup", 7: "ca", 8: "na", 12: "co", 13: "me"
+            };
+
+            const productsToSeed = PRODUCTS.map(p => ({
+                ...p,
+                imgKey: imgKeyMap[p.id] || "ori" // Fallback
+            }));
+
+            await db.seedProducts(productsToSeed);
+            alert('Products seeded successfully!');
+        }
+    };
+
     const calculateTotalRevenue = () => {
         return orders.reduce((acc, order) => acc + (order.payment?.total || 0), 0);
     };
@@ -45,6 +65,9 @@ export const AdminDashboard = ({ onBack }) => {
                         </button>
                         <button onClick={handleClearData} className="px-4 py-2 bg-red-50 text-red-600 border border-red-200 rounded-lg hover:bg-red-100 transition-colors flex items-center gap-2">
                             <Icons.Trash size={16} /> Clear Data
+                        </button>
+                        <button onClick={handleSeedData} className="px-4 py-2 bg-blue-50 text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors flex items-center gap-2">
+                            <Icons.Refresh size={16} /> Seed Products
                         </button>
                     </div>
                 </div>

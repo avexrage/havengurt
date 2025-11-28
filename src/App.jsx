@@ -29,6 +29,12 @@ const AppContent = () => {
 
   const [flyingParticles, setFlyingParticles] = useState([]);
 
+  useEffect(() => {
+    if (window.location.search.includes('admin=true')) {
+      setView('admin');
+    }
+  }, []);
+
   const addToCart = (product, change, e) => {
     if (e) {
       e.stopPropagation();

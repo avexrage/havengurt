@@ -24,8 +24,17 @@ export const db = {
         return await dbService.updateOrderStatus(id, status);
     },
 
-    // Clear all orders (Not supported in Firebase client for safety, but we can keep the method signature)
+    // Clear all orders
     clearOrders: () => {
         console.warn("Clear orders not supported in production mode");
+    },
+
+    // Products
+    getProducts: async () => {
+        return await dbService.getAllProducts();
+    },
+
+    seedProducts: async (products) => {
+        return await dbService.seedProducts(products);
     }
 };
