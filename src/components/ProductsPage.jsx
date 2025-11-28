@@ -72,7 +72,8 @@ export const ProductsPage = ({ cart, onAdd, onBack, initialCategory = 'all' }) =
                                         </div>
                                         <div className="p-6 flex-grow flex flex-col">
                                             <h3 className="font-bold text-lg text-brand-black mb-1">{product.name}</h3>
-                                            <p className="text-sm text-brand-text mb-4">{product.desc}</p>
+                                            <p className="text-sm text-brand-text mb-2">{product.desc}</p>
+                                            <p className="font-bold text-brand-blue mb-4">Rp {product.price.toLocaleString()}</p>
                                             <div className="mt-auto">
                                                 {qty === 0 ? (
                                                     <button onClick={(e) => onAdd(product, 1, e)} className="w-full py-3 rounded-xl font-bold text-sm shadow-md bg-[#115AA6] text-white hover:brightness-110 transition-transform active:scale-95"><span>+</span> {t('products.addToPreOrder')}</button>
