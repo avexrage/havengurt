@@ -68,23 +68,6 @@ export const AdminDashboard = ({ onBack }) => {
                         <h1 className="text-3xl font-bold text-brand-blue">Admin Dashboard</h1>
                         <p className="text-gray-500">Manage your orders and sales</p>
                     </div>
-                    <div className="flex gap-3">
-                        <button onClick={onBack} className="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors">
-                            Back to Site
-                        </button>
-                        <button onClick={handleClearData} className="px-4 py-2 bg-red-50 text-red-600 border border-red-200 rounded-lg hover:bg-red-100 transition-colors flex items-center gap-2">
-                            <Icons.Trash size={16} /> Clear Data
-                        </button>
-                        <button onClick={handleSeedData} className="px-4 py-2 bg-blue-50 text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors flex items-center gap-2">
-                            <Icons.Refresh size={16} /> Seed Products
-                        </button>
-                    </div>
-                </div>
-
-                {loading && <div className="text-center py-12">Loading dashboard...</div>}
-                {error && <div className="bg-red-50 text-red-600 p-4 rounded-lg mb-8">{error}</div>}
-
-                {!loading && !error && (
                     <>
                         {/* Stats Cards */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -183,7 +166,7 @@ export const AdminDashboard = ({ onBack }) => {
                         </div>
                     </>
                 )}
+                </div>
             </div>
-        </div>
-    );
+            );
 };
