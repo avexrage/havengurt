@@ -55,9 +55,9 @@ export const CheckoutModal = ({ isOpen, onClose, cart, onClearCart }) => {
             const orderData = {
                 userId: user ? user.id : null, // Link to user if logged in
                 customer: {
-                    addressDetail: deliveryInfo.addressDetail,
-                    distance: deliveryInfo.distance,
-                    coordinates: deliveryInfo.coordinates // Assuming DeliveryMap passes this if needed, or just rely on distance
+                    addressDetail: deliveryInfo.addressDetail || '',
+                    distance: deliveryInfo.distance || 0,
+                    coordinates: deliveryInfo.coordinates || null
                 },
                 items: cart,
                 payment: {

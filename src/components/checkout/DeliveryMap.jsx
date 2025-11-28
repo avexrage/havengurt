@@ -42,17 +42,17 @@ export const DeliveryMap = ({ onLocationSelect }) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        if (distance !== null) {
+        if (distance !== null && position !== null) {
             if (distance > MAX_RADIUS_KM) {
                 setError(`Location is too far (${distance.toFixed(2)} km). Max delivery radius is ${MAX_RADIUS_KM} km.`);
-                onLocationSelect({ valid: false, distance, fee: 0 });
+                onLocationSelect({ valid: false, distance, fee: 0, coordinates: position });
             } else {
                 setError(null);
                 const fee = distance <= FREE_RADIUS_KM ? 0 : 10000; // Example fee: 10k if > 2km
-                onLocationSelect({ valid: true, distance, fee });
+                onLocationSelect({ valid: true, distance, fee, coordinates: position });
             }
         }
-    }, [distance, onLocationSelect]);
+    }, [distance, position, onLocationSelect]);
 
     return (
         <div className="space-y-4">
@@ -114,7 +114,7 @@ export const DeliveryMap = ({ onLocationSelect }) => {
                                         placeholder="e.g. House number, color of the gate, nearby landmarks..."
                                         className="w-full p-2 rounded-md border border-blue-200 text-sm focus:ring-2 focus:ring-brand-blue outline-none"
                                         rows="2"
-                                        onChange={(e) => onLocationSelect({ valid: true, distance, fee: distance <= FREE_RADIUS_KM ? 0 : 10000, addressDetail: e.target.value })}
+                                        onChange={(e) => onLocationSelect({ valid: true, distance, fee: distance <= FREE_RADIUS_KM ? 0 : 10000, addressDetail: e.target.value, coordinates: position })}
                                     ></textarea>
                                 </div>
                             </>
