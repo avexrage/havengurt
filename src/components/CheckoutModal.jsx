@@ -112,7 +112,7 @@ export const CheckoutModal = ({ isOpen, onClose, cart, onClearCart }) => {
                         <div className="space-y-4">
                             <h3 className="font-bold text-lg">Select Delivery Location</h3>
                             <p className="text-sm text-gray-500 mb-4">Click on the map to pin your location. Green zone is free delivery!</p>
-                            <DeliveryMap onLocationSelect={setDeliveryInfo} />
+                            <DeliveryMap onLocationSelect={setDeliveryInfo} initialLocation={deliveryInfo} />
                         </div>
                     )}
 

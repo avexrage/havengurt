@@ -36,9 +36,9 @@ function LocationMarker({ position, setPosition, setDistance }) {
     );
 }
 
-export const DeliveryMap = ({ onLocationSelect }) => {
-    const [position, setPosition] = useState(null);
-    const [distance, setDistance] = useState(null);
+export const DeliveryMap = ({ onLocationSelect, initialLocation }) => {
+    const [position, setPosition] = useState(initialLocation?.coordinates || null);
+    const [distance, setDistance] = useState(initialLocation?.distance || null);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -114,6 +114,7 @@ export const DeliveryMap = ({ onLocationSelect }) => {
                                         placeholder="e.g. House number, color of the gate, nearby landmarks..."
                                         className="w-full p-2 rounded-md border border-blue-200 text-sm focus:ring-2 focus:ring-brand-blue outline-none"
                                         rows="2"
+                                        defaultValue={initialLocation?.addressDetail}
                                         onChange={(e) => onLocationSelect({ valid: true, distance, fee: distance <= FREE_RADIUS_KM ? 0 : 10000, addressDetail: e.target.value, coordinates: position })}
                                     ></textarea>
                                 </div>
