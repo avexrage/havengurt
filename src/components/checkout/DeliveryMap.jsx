@@ -16,7 +16,7 @@ let DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
-const STORE_LOCATION = [-7.3548982, 109.9067464];
+const STORE_LOCATION = [-7.3579573, 109.9058794];
 const FREE_RADIUS_KM = 2;
 const MAX_RADIUS_KM = 4;
 
