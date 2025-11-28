@@ -32,10 +32,10 @@ export const Navbar = ({ cartCount, onOpenCart, onNavigate, currentView, animate
             transition={{ duration: 0.5 }}
             className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-6'}`}
         >
-            <div className="container mx-auto px-6 flex justify-between items-center">
+            <div className="container mx-auto px-6 flex justify-between items-center relative">
                 <Logo onClick={() => handleNavClick('home')} />
 
-                <div className="hidden md:flex items-center gap-10 text-sm font-semibold text-brand-text">
+                <div className="hidden md:flex absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 items-center gap-10 text-sm font-semibold text-brand-text">
                     <button onClick={() => handleNavClick('home')} className={`${currentView === 'home' ? 'text-brand-blue' : 'hover:text-brand-blue'} transition-colors`}>{t('nav.home')}</button>
                     <button onClick={() => handleNavClick('about')} className={`${currentView === 'about' ? 'text-brand-blue' : 'hover:text-brand-blue'} transition-colors`}>{t('nav.about')}</button>
                     <button onClick={handleProductClick} className={`${currentView === 'products' ? 'text-brand-blue' : 'hover:text-brand-blue'} transition-colors`}>{t('nav.products')}</button>
