@@ -35,7 +35,7 @@ export const Footer = ({ onAdminClick }) => {
                             <li className="flex items-center gap-3 md:justify-center"><span>📞</span> +62 851-6105-2901</li>
                         </ul>
                         <div className="flex gap-4 mt-6 md:justify-center">
-                            <a href="#" className="w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center hover:bg-white hover:text-brand-blue transition-colors"><Icons.Instagram /></a>
+                            <a href="https://www.instagram.com/haven.gurt/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center hover:bg-white hover:text-brand-blue transition-colors"><Icons.Instagram /></a>
                         </div>
                     </div>
                 </div>
