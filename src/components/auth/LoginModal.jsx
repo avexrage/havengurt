@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icons } from '../Icons';
 import { useAuth } from '../../context/AuthContext';
+import { db } from '../../services/db';
 
 export const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
     const [isLogin, setIsLogin] = useState(true);
@@ -18,12 +19,27 @@ export const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
         setError('');
         try {
             if (isLogin) {
-                await login(email, password);
+                // Check against DB Settings first for "Admin" username login
+                const adminSettings = await db.getAdminSettings();
+                console.log("Attempting Admin Login:", { inputEmail: email, inputPass: password, dbSettings: adminSettings });
+
+                if (email === adminSettings.username && password === adminSettings.password) {
+                    // Local Admin Login validated by DB
+                    onClose();
+                    if (onLoginSuccess) onLoginSuccess({
+                        email: adminSettings.notifiedEmail,
+                        name: 'Admin',
+                        isAdmin: true
+                    });
+                    return;
+                } else {
+                    await login(email, password);
+                }
             } else {
                 await register(name, email, password);
             }
             onClose();
-            if (onLoginSuccess) onLoginSuccess();
+            if (onLoginSuccess) onLoginSuccess({ email: email });
         } catch (err) {
             setError(err.message);
         }
@@ -33,7 +49,7 @@ export const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
         try {
             await loginWithGoogle();
             onClose();
-            if (onLoginSuccess) onLoginSuccess();
+            if (onLoginSuccess) onLoginSuccess({ email: 'google-user' }); // Placeholder or get from auth result
         } catch (err) {
             console.error("Google Login Error:", err);
             setError(err.message || 'Google Login Failed');
@@ -67,9 +83,9 @@ export const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                         </div>
                     )}
                     <div>
-                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Email</label>
+                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Email or Username</label>
                         <input
-                            type="email"
+                            type="text"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className="w-full p-3 rounded-xl border border-gray-300 focus:border-brand-blue outline-none"
@@ -92,6 +108,19 @@ export const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                     <button type="submit" className="w-full btn-blue text-white py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all">
                         {isLogin ? 'Login' : 'Sign Up'}
                     </button>
+
+                    {isLogin && (
+                        <div className="text-center mt-2">
+                            <button type="button" onClick={async () => {
+                                if (window.confirm("Reset Admin password to default (admin/admin)?")) {
+                                    await db.saveAdminSettings({ username: 'admin', password: 'admin', notifiedEmail: 'poayof@gmail.com' });
+                                    alert("Admin credentials reset to: admin / admin");
+                                }
+                            }} className="text-xs text-gray-400 hover:text-brand-blue underline">
+                                Forgot Admin Password? (Reset)
+                            </button>
+                        </div>
+                    )}
                 </form>
 
                 <div className="relative my-6">

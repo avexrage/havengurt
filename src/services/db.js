@@ -36,5 +36,14 @@ export const db = {
 
     seedProducts: async (products) => {
         return await dbService.seedProducts(products);
+    },
+
+    // Admin Settings
+    getAdminSettings: async () => {
+        return await dbService.getAdminSettings();
+    },
+
+    saveAdminSettings: async (settings) => {
+        return await dbService.saveAdminSettings(settings);
     }
 };

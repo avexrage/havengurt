@@ -3,13 +3,13 @@ import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, doc, 
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBfQmoLCY9dH0b4XO151lzUW_Ldt-EWdlQ",
-    authDomain: "havengurt.firebaseapp.com",
-    projectId: "havengurt",
-    storageBucket: "havengurt.firebasestorage.app",
-    messagingSenderId: "165715434348",
-    appId: "1:165715434348:web:70e58b879839e89ca5f149",
-    measurementId: "G-HYHR026Q5F"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);
@@ -42,7 +42,7 @@ export const dbService = {
 
     // Get User Orders
     getUserOrders: async (userId) => {
-        const q = query(collection(db, "orders"), where("userId", "==", userId), orderBy("createdAt", "desc"));
+        const q = query(collection(db, "orders"), where("userId", "==", userId));
         const querySnapshot = await getDocs(q);
         return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     },
@@ -116,5 +116,27 @@ export const dbService = {
             const ref = doc(db, "products", String(product.id));
             await setDoc(ref, productData, { merge: true });
         }
+    },
+
+    // Get Admin Settings
+    getAdminSettings: async () => {
+        const docRef = doc(db, "settings", "admin");
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            return docSnap.data();
+        } else {
+            // Default fallback if DB is empty
+            return {
+                username: "admin",
+                password: "admin", // In production this should be hashed or handled via Auth
+                notifiedEmail: "poayof@gmail.com"
+            };
+        }
+    },
+
+    // Save Admin Settings
+    saveAdminSettings: async (settings) => {
+        const docRef = doc(db, "settings", "admin");
+        await setDoc(docRef, settings, { merge: true });
     }
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icons } from '../Icons';
+import qrisImage from '../../assets/images/qris.jpg';
 
 export const PaymentQRIS = ({ total, onPaymentComplete, onDataChange, paymentData }) => {
     const handleNameChange = (e) => {
@@ -13,7 +14,7 @@ export const PaymentQRIS = ({ total, onPaymentComplete, onDataChange, paymentDat
         }
     };
 
-    const isValid = paymentData?.senderName?.trim().length > 0 && paymentData?.proofFile;
+    const isValid = paymentData?.senderName?.trim().length > 0 && paymentData?.email?.trim().length > 0 && paymentData?.proofFile;
 
     return (
         <div className="space-y-6 text-center">
@@ -25,12 +26,9 @@ export const PaymentQRIS = ({ total, onPaymentComplete, onDataChange, paymentDat
                 </div>
 
                 {/* Placeholder for QR Code */}
-                <div className="w-48 h-48 bg-gray-100 mx-auto rounded-lg flex items-center justify-center mb-4 border border-gray-200">
-                    <div className="text-gray-400 text-xs">
-                        [QR CODE IMAGE]
-                        <br />
-                        NMID: ID123456789
-                    </div>
+                {/* QR Code */}
+                <div className="w-48 h-auto mx-auto mb-4">
+                    <img src={qrisImage} alt="QRIS Payment" className="w-full h-full object-contain" />
                 </div>
 
                 <div className="font-mono font-bold text-xl text-brand-black mb-1">
@@ -48,6 +46,17 @@ export const PaymentQRIS = ({ total, onPaymentComplete, onDataChange, paymentDat
                         className="w-full p-3 rounded-xl border border-gray-300 focus:border-brand-blue outline-none"
                         value={paymentData?.senderName || ''}
                         onChange={handleNameChange}
+                    />
+                </div>
+
+                <div>
+                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Email for Receipt <span className="text-red-500">*</span></label>
+                    <input
+                        type="email"
+                        placeholder="you@example.com"
+                        className="w-full p-3 rounded-xl border border-gray-300 focus:border-brand-blue outline-none"
+                        value={paymentData?.email || ''}
+                        onChange={(e) => onDataChange(prev => ({ ...prev, email: e.target.value }))}
                     />
                 </div>
 

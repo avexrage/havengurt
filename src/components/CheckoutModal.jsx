@@ -8,6 +8,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { format } from 'date-fns';
 
 import { db } from '../services/db';
+import { emailService } from '../services/emailService';
 import { useAuth } from '../context/AuthContext';
 
 const STEPS = {
@@ -28,8 +29,12 @@ export const CheckoutModal = ({ isOpen, onClose, cart, onClearCart }) => {
 
     // Update sender name if user logs in while modal is open (edge case)
     useEffect(() => {
-        if (user && !paymentData.senderName) {
-            setPaymentData(prev => ({ ...prev, senderName: user.name }));
+        if (user) {
+            setPaymentData(prev => ({
+                ...prev,
+                senderName: prev.senderName || user.name,
+                email: prev.email || user.email
+            }));
         }
     }, [user]);
 
@@ -57,9 +62,13 @@ export const CheckoutModal = ({ isOpen, onClose, cart, onClearCart }) => {
                 customer: {
                     addressDetail: deliveryInfo.addressDetail || '',
                     distance: deliveryInfo.distance || 0,
-                    coordinates: deliveryInfo.coordinates || null
+                    coordinates: deliveryInfo.coordinates ? {
+                        lat: Number(deliveryInfo.coordinates.lat),
+                        lng: Number(deliveryInfo.coordinates.lng)
+                    } : null
                 },
                 items: cart,
+                customerEmail: paymentData.email, // Save email for notifications
                 payment: {
                     total: total,
                     method: 'QRIS',
@@ -69,7 +78,10 @@ export const CheckoutModal = ({ isOpen, onClose, cart, onClearCart }) => {
                 deliveryDate: selectedDate.toISOString()
             };
 
-            await db.saveOrder(orderData);
+            const savedOrder = await db.saveOrder(orderData); // Get the ID back
+
+            // Send Application Email (Simulation)
+            await emailService.sendOrderPlaced({ id: savedOrder.id, ...orderData });
 
             setTimeout(() => {
                 setIsProcessing(false);
@@ -77,7 +89,7 @@ export const CheckoutModal = ({ isOpen, onClose, cart, onClearCart }) => {
             }, 1500);
         } catch (error) {
             console.error("Failed to save order:", error);
-            alert("Failed to place order. Please try again.");
+            alert(`Failed to place order: ${error.message}`);
             setIsProcessing(false);
         }
     };

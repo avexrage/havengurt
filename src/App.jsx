@@ -106,16 +106,18 @@ const AppContent = () => {
         }
       `}</style>
 
-      <Navbar
-        cartCount={cart.reduce((acc, item) => acc + item.quantity, 0)}
-        onOpenCart={() => setIsCartOpen(true)}
-        onNavigate={handleNavigate}
-        currentView={view}
-        animateCart={false} // Static cart
-        user={user}
-        onLoginClick={() => setIsLoginOpen(true)}
-        onProfileClick={() => setIsProfileOpen(true)}
-      />
+      {view !== 'admin' && (
+        <Navbar
+          cartCount={cart.reduce((acc, item) => acc + item.quantity, 0)}
+          onOpenCart={() => setIsCartOpen(true)}
+          onNavigate={handleNavigate}
+          currentView={view}
+          animateCart={false} // Static cart
+          user={user}
+          onLoginClick={() => setIsLoginOpen(true)}
+          onProfileClick={() => setIsProfileOpen(true)}
+        />
+      )}
 
       {view === 'home' && (
         <>
@@ -149,10 +151,9 @@ const AppContent = () => {
         <AdminDashboard onBack={() => setView('home')} />
       )}
 
-      <Footer onNavigate={handleNavigate} onAdminClick={() => {
-        setView('admin');
-        window.scrollTo(0, 0);
-      }} />
+      {view !== 'admin' && (
+        <Footer onNavigate={handleNavigate} />
+      )}
 
       <CartModal
         isOpen={isCartOpen}
@@ -177,8 +178,11 @@ const AppContent = () => {
       <LoginModal
         isOpen={isLoginOpen}
         onClose={() => setIsLoginOpen(false)}
-        onLoginSuccess={() => {
-          // Optional: Show success toast or redirect
+        onLoginSuccess={(user) => {
+          if (user?.isAdmin || user?.email === 'admin') {
+            setView('admin');
+            window.scrollTo(0, 0);
+          }
         }}
       />
 

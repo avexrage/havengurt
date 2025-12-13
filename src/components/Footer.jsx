@@ -42,7 +42,6 @@ export const Footer = ({ onAdminClick }) => {
 
                 <div className="border-t border-white/10 mt-12 pt-8 text-center text-sm text-blue-200">
                     <p>&copy; {new Date().getFullYear()} Havengurt. All rights reserved. <span className="mx-2">|</span> Made with <Icons.Heart className="inline w-4 h-4 text-white mx-1" /> in Indonesia</p>
-
                 </div>
             </div>
         </footer>

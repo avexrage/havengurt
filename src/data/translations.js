@@ -132,7 +132,7 @@ export const translations = {
             clearAll: "Clear All",
             empty: "Your bag is empty.",
             total: "Total Estimate",
-            checkout: "Checkout via WhatsApp"
+            checkout: "Checkout Now"
         },
         footer: {
             description: "Premium homemade yogurt from the highlands of Wonosobo. Made with love, served with care.",
@@ -278,7 +278,7 @@ export const translations = {
             clearAll: "Hapus Semua",
             empty: "Tas belanja Anda kosong.",
             total: "Estimasi Total",
-            checkout: "Checkout via WhatsApp"
+            checkout: "Checkout Sekarang"
         },
         footer: {
             description: "Yoghurt rumahan premium dari dataran tinggi Wonosobo. Dibuat dengan cinta, disajikan dengan hati.",

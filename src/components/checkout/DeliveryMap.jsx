@@ -23,7 +23,8 @@ const MAX_RADIUS_KM = 4;
 function LocationMarker({ position, setPosition, setDistance }) {
     const map = useMapEvents({
         click(e) {
-            setPosition(e.latlng);
+            const latlng = { lat: e.latlng.lat, lng: e.latlng.lng };
+            setPosition(latlng);
             const dist = map.distance(e.latlng, STORE_LOCATION) / 1000; // distance in km
             setDistance(dist);
         },

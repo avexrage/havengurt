@@ -16,12 +16,16 @@ export const ProfileModal = ({ onClose }) => {
             if (user?.id) {
                 try {
                     const userOrders = await dbService.getUserOrders(user.id);
+                    // Sort locally since we removed database sorting
+                    userOrders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
                     setOrders(userOrders);
                 } catch (error) {
                     console.error("Error fetching orders:", error);
                 } finally {
                     setLoading(false);
                 }
+            } else {
+                setLoading(false);
             }
         };
         fetchOrders();
@@ -91,7 +95,7 @@ export const ProfileModal = ({ onClose }) => {
                                         </span>
                                     </div>
                                     <span className="font-bold text-brand-black">
-                                        Rp {order.total?.toLocaleString()}
+                                        Rp {order.payment?.total?.toLocaleString()}
                                     </span>
                                 </div>
                                 <div className="space-y-2">
