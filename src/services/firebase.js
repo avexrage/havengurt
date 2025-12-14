@@ -129,7 +129,7 @@ export const dbService = {
             return {
                 username: "admin",
                 password: "admin", // In production this should be hashed or handled via Auth
-                notifiedEmail: "poayof@gmail.com"
+                notifiedEmail: "havengurt@gmail.com"
             };
         }
     },

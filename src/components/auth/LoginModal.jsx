@@ -113,7 +113,7 @@ export const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                         <div className="text-center mt-2">
                             <button type="button" onClick={async () => {
                                 if (window.confirm("Reset Admin password to default (admin/admin)?")) {
-                                    await db.saveAdminSettings({ username: 'admin', password: 'admin', notifiedEmail: 'poayof@gmail.com' });
+                                    await db.saveAdminSettings({ username: 'admin', password: 'admin', notifiedEmail: 'havengurt@gmail.com' });
                                     alert("Admin credentials reset to: admin / admin");
                                 }
                             }} className="text-xs text-gray-400 hover:text-brand-blue underline">
