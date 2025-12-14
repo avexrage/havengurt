@@ -4,11 +4,23 @@ const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
+console.log("DEBUG: Keys Loaded?", {
+    ServiceId: SERVICE_ID ? SERVICE_ID.substring(0, 5) + "..." : "MISSING",
+    TemplateId: TEMPLATE_ID ? TEMPLATE_ID.substring(0, 5) + "..." : "MISSING",
+    PublicKey: PUBLIC_KEY ? PUBLIC_KEY.substring(0, 5) + "..." : "MISSING"
+});
+
 export const emailService = {
     // Send email using EmailJS
     sendEmail: async (to, subject, body, type = 'generic') => {
         try {
             console.log(`📧 [Email Service] Sending ${type} email to ${to}...`);
+
+            // Validate keys before sending
+            if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+                console.error("❌ CRITICAL: Missing EmailJS Keys!", { SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY });
+                return false;
+            }
 
             const templateParams = {
                 to_email: to,
