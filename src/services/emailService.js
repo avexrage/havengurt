@@ -1,17 +1,35 @@
+import emailjs from '@emailjs/browser';
+
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
 export const emailService = {
-    // Simulate sending an email (To be replaced with EmailJS or similar)
-    sendEmail: (to, subject, body, type = 'generic') => {
-        console.group('📧 [Email Service] Sending Email...');
-        console.log('To:', to);
-        console.log('Subject:', subject);
-        console.log('Body:', body);
-        console.log('Type:', type);
-        console.groupEnd();
+    // Send email using EmailJS
+    sendEmail: async (to, subject, body, type = 'generic') => {
+        try {
+            console.log(`📧 [Email Service] Sending ${type} email to ${to}...`);
 
-        // In a real implementation:
-        // emailjs.send('service_id', 'template_id', { to_email: to, ...params })
+            const templateParams = {
+                to_email: to,
+                subject: subject,
+                message: body,
+                type: type
+            };
 
-        return Promise.resolve(true);
+            const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+
+            if (response.status === 200) {
+                console.log('✅ Email sent successfully!');
+                return true;
+            } else {
+                console.error('❌ Email sending failed:', response);
+                return false;
+            }
+        } catch (error) {
+            console.error('❌ Error sending email:', error);
+            return false;
+        }
     },
 
     sendOrderPlaced: async (order) => {
@@ -21,7 +39,7 @@ export const emailService = {
         await emailService.sendEmail(
             adminEmail,
             `New Order #${order.id.slice(0, 8)}`,
-            `New order received from ${order.payment.senderName}.\nTotal: Rp ${order.payment.total.toLocaleString()}\nStatus: Pending Validation`,
+            `New order received from ${order.payment.senderName}.\nTotal: Rp ${order.payment.total.toLocaleString()}\nStatus: Pending Validation\n\nView Dashboard: https://havengurt.vercel.app/admin`,
             'new_order_admin'
         );
 
@@ -30,7 +48,7 @@ export const emailService = {
         if (customerEmail && customerEmail.includes('@')) {
             await emailService.sendEmail(
                 customerEmail,
-                `Order #${order.id.slice(0, 8)} Received - Havengurt`,
+                `Order #$Received - Havengurt`,
                 `Hi ${order.payment.senderName},\n\nThank you for your order! We have received your payment proof and are currently verifying it.\n\nItems:\n${order.items.map(i => `- ${i.name} (${i.quantity}x)`).join('\n')}\n\nWe will notify you once your order is confirmed.\n\nWarm Regards,\nHavengurt Team`,
                 'new_order_customer'
             );
@@ -46,7 +64,7 @@ export const emailService = {
         switch (newStatus) {
             case "Paid":
                 subject = `Payment Verified - Order #${orderId.slice(0, 8)}`;
-                message = `Hi ${customerName},\n\nGreat news! Your payment has been verified. We are now preparing your fresh yogurt.\n\nOrder #${orderId.slice(0, 8)}\nDelivery Date: ${new Date().toLocaleDateString()}`; // Date logic needs improvement per order
+                message = `Hi ${customerName},\n\nGreat news! Your payment has been verified. We are now preparing your fresh yogurt.\n\nOrder #${orderId.slice(0, 8)}\nDelivery Date: ${new Date().toLocaleDateString()}`;
                 break;
             case "Delivered":
                 subject = `Order Delivered! - Order #${orderId.slice(0, 8)}`;
