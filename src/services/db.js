@@ -25,8 +25,8 @@ export const db = {
     },
 
     // Clear all orders
-    clearOrders: () => {
-        console.warn("Clear orders not supported in production mode");
+    clearOrders: async () => {
+        return await dbService.clearAllOrders();
     },
 
     // Products

@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, doc, updateDoc, setDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, doc, updateDoc, setDoc, getDoc, deleteDoc } from 'firebase/firestore';
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -138,5 +138,13 @@ export const dbService = {
     saveAdminSettings: async (settings) => {
         const docRef = doc(db, "settings", "admin");
         await setDoc(docRef, settings, { merge: true });
+    },
+
+    // Clear All Orders (Testing only)
+    clearAllOrders: async () => {
+        const q = query(collection(db, "orders"));
+        const snapshot = await getDocs(q);
+        const deletePromises = snapshot.docs.map(d => deleteDoc(doc(db, "orders", d.id)));
+        await Promise.all(deletePromises);
     }
 };
